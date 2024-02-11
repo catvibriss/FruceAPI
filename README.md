@@ -32,7 +32,6 @@ run(about_user()) # запускаем асинхронную функцию
 # Client Class
 > Данный класс предназначен для работы с FruitSpace  
 > Для работы понадобится Ваш токен  
-
 ### Получение GDPS сервера
 ```py
 import FruceAPI as FRAPI
