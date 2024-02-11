@@ -28,7 +28,7 @@ run(about_user()) # запускаем асинхронную функцию
 ```
 
 # Работаем с GDPS
-> _GDPS - Geometry Dash Private Server_\
+> _GDPS - Geometry Dash Private Server_
 
 Напишем программу для получения GDPS сервера
 ```py
