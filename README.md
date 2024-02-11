@@ -12,7 +12,7 @@ pip install FruceAPI
 import FruceAPI as FRAPI # импортируем FruceAPI
 from asyncio import run # импортируем библиотеку для запуска асинхронной функции
 
-client = FRAPI.Client("token") # создаём подключение к FruitSpace
+client = FRAPI.Client("token") # класс клиента для работы с FruitSpace
 # token - это ваш токен на FruitSpace
 # НИКОМУ НЕ ДАВАЙТЕ ЭТОТ ТОКЕН (ДАЖЕ КОТУ)!!!
 async def about_user(): 
@@ -21,7 +21,7 @@ async def about_user():
 
 run(about_user()) # запускаем асинхронную функцию
 ```
-Обратите вниманрие что `get_user_info()` это `corotuine` функция  
+Обратите внимание что `get_user_info()`, как и все остальные функции в FruceAPI, это `corotuine` функция  
 Если вы всё сделали правильно, то в консоли вы увидите имя вашего аккаунта на FruitSpace
 ```
 Ваш никнейм: Nickname
@@ -51,3 +51,33 @@ run(get_gdps())
 ID сервера: 0015
 ```
 *тут будет полный список атрибутов*
+
+# GDPS class
+Данный класс позволяет работать с данными из GDPS и не требует введения токена FruitSpace  
+### Получение данных про игрока
+```py
+import FruceAPI as FRAPI
+from asyncio import run
+
+gdps = FRAPI.GDPS('0015') # Подключаем GDPS по ID сервера
+
+async def get_gdps_user():
+    # user = await gdps.get_user(1) # для поиска по UID
+    user = await gdps.get_user_with_username("Kotvpalto") # для поиска по никнейму
+    # выводим полученные данные
+    print(f"UID игрока: {user.uid}")
+    print(f"Никнейм игрока: {user.uname}")
+    print(f"Звёзды игрока: {user.stars}")
+    
+run(get_gdps_user())
+```
+Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User` 
+В консоли мы увидим сообщение:
+```
+UID игрока: 1
+Никнейм игрока: Kotvpalto
+Звёзды игрока: 82
+# ваши значения будут другими
+```
+*тут будет полный список атрибутов*
+
