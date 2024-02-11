@@ -68,11 +68,19 @@ async def get_gdps_user():
     print(f"UID игрока: {user.uid}")
     print(f"Никнейм игрока: {user.uname}")
     print(f"Звёзды игрока: {user.stars}")
-    
+
+    user_comments = await gdps.get_acc_comments(userid=1, page=0)
+    # userid - UID игрока
+    # page - страница с комментариями
+    # функция возвращает список обьектов AccComment
+    print(f"Комментарий: {user_comments[0].comment}")
+    print(f"Лайки: {user_comments[0].likes}")
+
 run(get_gdps_user())
 ```
-Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User` 
-*тут будет полный список атрибутов*
+Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User`
+*тут будет полный список атрибутов User*
+*тут будет полный список атрибутов AccComment*
 
 ### Получение данных про уровень
 ```py
@@ -91,8 +99,18 @@ async def get_gdps_level():
     # 0 - tiny / 1 - short / 2 - meduim /
     # 3 - long / 4 - XL / 5 - platformer
 
+    level_comments = await gdps.get_comments(1) # указываем ID уровня
+    # Для получения комментариев используется функция get_comments()
+    print(level_comments) # возвращется список с комментариями
+
+    daily_level = await gdps.get_daily()
+    weekly_level = await gdps.get_weekly()
+    # get_daily и get_weekly возвращают тип данных Level
+
 run(get_gdps_level())
 ```
-Поиск уровня по его ID возвращает тип данных - `Level`
+*Примечание: функция get_comments() не работает*
+Поиск уровня по его ID возвращает тип данных - `Level`  
 *тут будет полный список атрибутов*
 
+### Получение 
