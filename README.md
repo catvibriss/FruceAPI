@@ -128,8 +128,30 @@ async def get_gdps_level():
 
 run(get_gdps_level())
 ```
-Поиск песни по её ID возвращает тип данных - `Song`
+Поиск песни по её ID возвращает тип данных - `Song`  
 *тут будет полный список атрибутов*
 ***
 ### Регистрация на GDPS
 Да, это возможно сделать с помощью FruceAPI
+```py
+import FruceAPI as FRAPI
+from asyncio import run
+
+gdps = FRAPI.GDPS('0015') # Подключаем GDPS по ID сервера
+
+async def get_gdps_level():
+    account = await gdps.register_account(
+        username='FrapiUser', # Имя игрока
+        password='RealPassword', # Пароль
+        email='example@gmail.com' # Почта
+    )
+
+    print(account) # выводит статус создания аккаунта
+    # 1 - аккаунт создан успешно
+    # -1 - данные вписаны не до конца (например вместо имени пустая строка)
+    # -2 - аккаунт с таким именем уже существует
+    # -3 - аккаунт с такой почтой уже существует
+
+run(get_gdps_level())
+```
+Данная функция ничего не возвращает, но создаёт аккаунт в БД, в который можно зайти и играть
