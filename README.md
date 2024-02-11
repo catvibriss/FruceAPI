@@ -27,8 +27,8 @@ run(about_user()) # запускаем асинхронную функцию
 Ваш никнейм: Nickname
 ```
 
-# Работаем с GDPS
-> _GDPS - Geometry Dash Private Server_
+# Client Class
+> Данный класс предназначем
 
 Напишем программу для получения GDPS сервера
 ```py
