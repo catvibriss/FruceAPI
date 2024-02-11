@@ -72,12 +72,27 @@ async def get_gdps_user():
 run(get_gdps_user())
 ```
 Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User` 
-В консоли мы увидим сообщение:
+*тут будет полный список атрибутов*
+
+### Получение данных про уровень
+```py
+import FruceAPI as FRAPI
+from asyncio import run
+
+gdps = FRAPI.GDPS('0015') # Подключаем GDPS по ID сервера
+
+async def get_gdps_level():
+    level = await gdps.download_level(1) # указываем ID уровня
+
+    print(f"ID уровня: {level.id}")
+    print(f"Название уровня: {level.name}")
+    print(f"Длина уровня: {level.length}")
+    # lenght возвращает числовое значение от 0 до 5
+    # 0 - tiny / 1 - short / 2 - meduim /
+    # 3 - long / 4 - XL / 5 - platformer
+
+run(get_gdps_level())
 ```
-UID игрока: 1
-Никнейм игрока: Kotvpalto
-Звёзды игрока: 82
-# ваши значения будут другими
-```
+Поиск уровня по его ID возвращает тип данных - `Level`
 *тут будет полный список атрибутов*
 
