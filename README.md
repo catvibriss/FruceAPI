@@ -78,7 +78,7 @@ async def get_gdps_user():
 
 run(get_gdps_user())
 ```
-Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User`
+Поиск игрока по его UID и по его никнейму возвращает одинаковый тип данных - `User`  
 *тут будет полный список атрибутов User*
 *тут будет полный список атрибутов AccComment*
 
@@ -109,8 +109,27 @@ async def get_gdps_level():
 
 run(get_gdps_level())
 ```
-*Примечание: функция get_comments() не работает*
-Поиск уровня по его ID возвращает тип данных - `Level`  
+*Примечание: функция get_comments() не работает*  
+Поиск уровня по его ID возвращает тип данных - `Level`    
 *тут будет полный список атрибутов*
 
-### Получение 
+### Получение данных о песне
+```py
+import FruceAPI as FRAPI
+from asyncio import run
+
+gdps = FRAPI.GDPS('0015') # Подключаем GDPS по ID сервера
+
+async def get_gdps_level():
+    song = await gdps.get_song(song_id=51) # указывается ID песни
+
+    print(f"Название песни: {song.song_name}")
+    print(f"Автор: {song.artist}")
+
+run(get_gdps_level())
+```
+Поиск песни по её ID возвращает тип данных - `Song`
+*тут будет полный список атрибутов*
+
+### Регистрация на GDPS
+Да, это возможно сделать с помощью FruceAPI
