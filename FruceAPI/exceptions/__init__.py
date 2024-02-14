@@ -6,3 +6,6 @@ class NoPermissionError(Exception):
 
 class InvalidRequestError(Exception):
     pass
+
+class MusicNotFoundError(Exception):
+    pass

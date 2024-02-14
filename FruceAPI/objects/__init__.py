@@ -12,6 +12,16 @@ class Song:
         self.size = args[9]
         self.url = unquote(args[13])
 
+class SongResponse:
+    def __init__(self, json: dict):
+        self.artist = json['artist']
+        self.id = json['id']
+        self.author_id  = json['author_id']
+        self.name = json['name']
+        self.is_banned = json['is_banned']
+        self.size = json['size']
+        self.url = json['url']
+
 class AccComment:
     def __init__(self, rawdata):
         args = rawdata.split('~')
@@ -23,6 +33,7 @@ class AccComment:
 class Comment:
     def __init__(self, rawdata):
         targs = rawdata.split(':')
+        print(rawdata, targs)
         args = targs[0].split('~')
         self.comment = base64.b64decode(args[1]).decode()
         self.uid = args[3]
@@ -42,7 +53,7 @@ class Level:
         self.level_string = utils.decode_level(args[7], False)
         self.version = args[9]
         self.authorid = args[11]
-        #self.difficulty = args[13]
+        self.difficulty = args[13]
         self.downloads = args[17]
         self.track_id = args[19]
         self.version_game = args[21]
@@ -104,8 +115,8 @@ class Server:
             self.plan = 'Singularity'
         elif json['plan'] == 3:
             self.plan = 'Takeoff'
-        self.name = json['srv_name']
-        self.owner = json['owner_id']
+        self.srv_name = json['srv_name']
+        self.owner_id = json['owner_id']
         self.user_count = json['user_count']
         self.level_count = json['level_count']
         self.client_android_url = json['client_android_url']
@@ -114,8 +125,57 @@ class Server:
         self.client_macos_url = json['client_macos_url']
         self.icon = json['icon']
         self.description = json['description']
+        self.text_align = json['text_align']
         self.discord = json['discord']
         self.vk = json['vk']
         self.version = json['version']
         self.is_custom_textures = json['is_custom_textures']
-        self.expiry_date = json['expire_date']
+
+class List:
+    def __init__(self, rawdata: str):
+        args = rawdata.split(':')
+        self.id = args[1]
+        self.name = args[3]
+        self.description = base64.b64decode(args[5])
+        self.author = args[11]
+        self.downloads = args[13]
+        self.likes = args[17]
+        self.levels = args[21].split(',')
+        
+class Node:
+    def __init__(self, data: str):
+        args = data.split(',')
+        self.name = args[1]
+        self.id = args[3]
+        self.type = 'track' if args[5] == '0' else 'folder'
+        if len(args) > 7:
+            self.parent_node = args[7]
+            self.size = args[9]
+
+class Srv:
+    def __init__(self, json):
+        self.srvid = json['srvid']
+        self.srv_name = json['srv_name']
+        self.plan = {1: 'Press Start', 2: 'Singularity', 3: 'Takeoff'}[json['plan']]
+        self.owner_id = json['owner_id']
+        self.user_count = json['user_count']
+        self.level_count = json['level_count']
+        self.comment_count = json['comment_count']
+        self.post_count = json['post_count']
+        self.creation_date = json['creation_date']
+        self.expire_date = json['expire_date']
+        self.client_android_url = json['client_android_url']
+        self.client_windows_url = json['client_windows_url']
+        self.client_ios_url = json['client_ios_url']
+
+class Tariff:
+    def __init__(self, json):
+        self.title = json['Title']
+        self.price_rub = json['PriceRUB']
+        self.price_usd = json['PriceUSD']
+
+
+class GDPSConfig:
+    def __init__(self, json):
+        self.srv = Srv(json['Srv'])
+        self.tariff = Tariff(json['Tariff'])
