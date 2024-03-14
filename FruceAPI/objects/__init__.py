@@ -2,6 +2,14 @@ from .. import utils
 from urllib.parse import unquote
 import base64
 
+def string_to_dict(input_str):
+    elements = input_str.split(':')
+    result = {elements[i]: elements[i+1] for i in range(0, len(elements), 2)}
+    return result
+
+def hello_world() -> str:
+    return 'hello world'
+
 class Song:
     def __init__(self, rawdata: str):
         args = rawdata.replace('~', '').split('|')
@@ -109,6 +117,7 @@ class User:
         self.twitch = args[59]
         self.diamonds = args[63]
         self.death = args[65]
+        self.moons = string_to_dict(rawdata)["52"]
 
 class Server:
     def __init__(self, json: dict):

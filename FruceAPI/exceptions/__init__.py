@@ -15,6 +15,3 @@ class AlreadyHaveFreeServer(Exception):
 
 class NotMoneyOnBalance(Exception):
     pass
-    
-class FistingMyAss(Exception):
-    pass
