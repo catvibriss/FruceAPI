@@ -1,4 +1,8 @@
 # FruceAPI
+![PyPI - Downloads](https://img.shields.io/pypi/dm/FruceAPI?color=7d61ff)
+![PyPI - License](https://img.shields.io/pypi/l/FruceAPI?color=9767ff)
+![PyPI - Version](https://img.shields.io/pypi/v/FruceAPI?color=bf69ff)
+
 FruceAPI - это удобный инструмент для работы с хостингом FruitSpace  
 Данная библиотека *не является официальной* и не создана разработчиками FruitSpace
 
